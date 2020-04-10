@@ -18,6 +18,8 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     background-color: #F4F6FE;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
   }
 
 
