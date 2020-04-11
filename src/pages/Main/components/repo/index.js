@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { Content } from './styles';
 
@@ -15,9 +16,12 @@ const Repo = (props) => {
           </div>
           <h3 className="repo-name">{name}</h3>
         </div>
-        <button className="repo-button" type="button">
+        <Link
+          className="repo-button"
+          to={`/repository/${encodeURIComponent(name)}`}
+        >
           Details
-        </button>
+        </Link>
       </Content>
     </>
   );

@@ -5,7 +5,7 @@ export const Content = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
-  width: 328px;
+  width: 100%;
   height: 64px;
   padding: 1rem 1.2rem;
   margin: 1.56rem 0;
@@ -20,7 +20,7 @@ export const Content = styled.div`
   .repo-name {
     color: #092b5e;
     font-size: 12px;
-    width: 58%;
+    width: 70%;
     display: flex;
     font-weight: 600;
   }
@@ -47,5 +47,6 @@ export const Content = styled.div`
     color: #999;
     font-size: 12px;
     cursor: pointer;
+    text-decoration: none;
   }
 `;

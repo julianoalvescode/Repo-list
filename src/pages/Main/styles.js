@@ -7,4 +7,8 @@ export const Content = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
+
+  .content-repo {
+    width: 33%;
+  }
 `;

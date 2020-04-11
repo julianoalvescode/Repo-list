@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Main from '../pages/Main';
-import RepoList from '../pages/Repository';
+import Repo from '../pages/Repository';
 import Error from '../pages/Error';
 
 export default function Routes() {
@@ -10,7 +10,7 @@ export default function Routes() {
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Main} />
-        <Route path="/repository" component={RepoList} />
+        <Route path="/repository/:repository" component={Repo} />
         <Route path="*" component={Error} />
       </Switch>
     </BrowserRouter>

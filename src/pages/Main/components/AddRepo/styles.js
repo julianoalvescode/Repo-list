@@ -13,6 +13,12 @@ export const Content = styled.div`
     height: 51px;
     padding: 25px 18px;
 
+    form {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
     svg {
       cursor: pointer;
     }
@@ -26,8 +32,10 @@ export const Content = styled.div`
     }
 
     .add-input {
+      font-family: 'Poppins', Helvetica, sans-serif;
       padding: 10px 0px;
       border: none;
+      width: 80%;
     }
   }
 `;
