@@ -43,7 +43,7 @@ class Repository extends Component {
       api.get(`/repos/${repoName}/issues`, {
         params: {
           state: filters.find((f) => f.active).state,
-          per_page: 4,
+          per_page: 5,
         },
       }),
     ]);
@@ -55,8 +55,45 @@ class Repository extends Component {
     });
   }
 
+  loadIssues = async () => {
+    const { match } = this.props;
+    const { filters, filterIndex, page } = this.state;
+
+    const repoName = decodeURIComponent(match.params.repository);
+
+    const response = await api.get(`/repos/${repoName}/issues`, {
+      params: {
+        state: filters[filterIndex].state,
+        per_page: 5,
+        page,
+      },
+    });
+
+    this.setState({ issues: response.data });
+  };
+
+  handleFilterClick = async (filterIndex) => {
+    await this.setState({ filterIndex });
+    this.loadIssues();
+  };
+
+  handlePage = async (action) => {
+    const { page } = this.state;
+    await this.setState({
+      page: action === 'back' ? page - 1 : page + 1,
+    });
+    this.loadIssues();
+  };
+
   render() {
-    const { repository, issues, loading } = this.state;
+    const {
+      repository,
+      loading,
+      issues,
+      filters,
+      filterIndex,
+      page,
+    } = this.state;
 
     if (loading) {
       return <Loading />;
@@ -91,15 +128,16 @@ class Repository extends Component {
             <h2 className="repo-profile-status">{repository.description}</h2>
           </div>
           <div className="repo-buttons">
-            <a className="link-all" href="#">
-              All
-            </a>
-            <a className="link-open" href="#">
-              Open
-            </a>
-            <a className="link-closed" href="#">
-              Closed
-            </a>
+            {filters.map((filter, index) => (
+              <button
+                type="button"
+                key={filter.label}
+                className={`link-${filter.label}`}
+                onClick={() => this.handleFilterClick(index)}
+              >
+                {filter.label}
+              </button>
+            ))}
           </div>
           <div className="repo-issues">
             {issues.map((i) => {

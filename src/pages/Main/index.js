@@ -17,16 +17,20 @@ class Main extends Component {
       newRepo: '',
       repositories: [],
       loading: false,
+      error: null,
     };
   }
 
+  // Carregar os dados do localStorage
   componentDidMount() {
     const repositories = localStorage.getItem('repositories');
+
     if (repositories) {
       this.setState({ repositories: JSON.parse(repositories) });
     }
   }
 
+  // Salvar os dados do localStorage
   componentDidUpdate(_, prevState) {
     const { repositories } = this.state;
 
@@ -35,32 +39,39 @@ class Main extends Component {
     }
   }
 
-  handleNewRepo = (e) => {
-    this.setState({ newRepo: e.target.value });
+  handleInputChange = (e) => {
+    this.setState({ newRepo: e.target.value, error: null });
   };
 
   handleSubmit = async (e) => {
     e.preventDefault();
 
-    this.setState({ loading: true });
+    this.setState({ loading: true, error: false });
 
-    const { newRepo, repositories } = this.state;
+    try {
+      const { newRepo, repositories } = this.state;
 
-    const response = await api.get(`/repos/${newRepo}`);
+      if (newRepo === '') throw 'You need indicate a repository';
 
-    const data = {
-      name: response.data.full_name,
-      avatar: response.data.owner.avatar_url,
-      id: 0,
-    };
+      const hasRepo = repositories.find((r) => r.name === newRepo);
 
-    this.setState({
-      repositories: [...repositories, data],
-      newRepo: '',
-      loading: false,
-    });
+      if (hasRepo) throw 'Double repository';
 
-    localStorage.setItem('list', JSON.stringify(repositories));
+      const response = await api.get(`/repos/${newRepo}`);
+
+      const data = {
+        name: response.data.full_name,
+      };
+
+      this.setState({
+        repositories: [...repositories, data],
+        newRepo: '',
+      });
+    } catch (error) {
+      this.setState({ error: true });
+    } finally {
+      this.setState({ loading: false });
+    }
   };
 
   render() {
@@ -81,7 +92,7 @@ class Main extends Component {
           <img src={Logo} alt="Logo" />
           <AddRepo
             value={newRepo}
-            changeRepo={this.handleNewRepo}
+            changeRepo={this.handleInputChange}
             sendRepo={this.handleSubmit}
           />
           <div className="content-repo">
@@ -93,7 +104,6 @@ class Main extends Component {
               );
             })}
           </div>
-          {loading ? 'teste' : 'não'}
         </Content>
       </>
     );
