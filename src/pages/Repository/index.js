@@ -24,9 +24,9 @@ class Repository extends Component {
     issues: [],
     loading: true,
     filters: [
-      { state: 'all', label: 'Todas', active: true },
-      { state: 'open', label: 'Abertas', active: false },
-      { state: 'closed', label: 'Fechadas', active: false },
+      { state: 'all', label: 'all', active: true },
+      { state: 'open', label: 'open', active: false },
+      { state: 'closed', label: 'closed', active: false },
     ],
     filterIndex: 0,
     page: 1,
