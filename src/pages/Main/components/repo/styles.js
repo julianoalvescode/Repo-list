@@ -49,4 +49,14 @@ export const Content = styled.div`
     cursor: pointer;
     text-decoration: none;
   }
+
+  .repo-button-remove {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+  }
 `;

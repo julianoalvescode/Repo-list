@@ -2,13 +2,12 @@ import styled from 'styled-components';
 
 export const Content = styled.div`
   height: 100%;
+  background-color: #fff;
   display: flex;
-  margin-top: 2.56rem;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  flex-direction: column;
 
-  .content-repo {
-    width: 400px;
+  img {
+    width: 40px;
   }
 `;

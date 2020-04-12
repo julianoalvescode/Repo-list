@@ -1,10 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { MdRemove } from 'react-icons/md';
 import { Content } from './styles';
 
 const Repo = (props) => {
   const { id, avatar, name } = props;
+
+  const handleDelete = () => {
+    localStorage.removeItem('repositories');
+    window.location.reload();
+  };
 
   return (
     <>
@@ -22,6 +28,13 @@ const Repo = (props) => {
         >
           Details
         </Link>
+        <button
+          onClick={handleDelete}
+          className="repo-button-remove"
+          type="button"
+        >
+          <MdRemove color="#FF1A1A" />
+        </button>
       </Content>
     </>
   );
