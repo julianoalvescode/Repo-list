@@ -11,15 +11,12 @@ import Logo from '../../assets/svg/logo.svg';
 import Loading from '../../assets/img/loading.gif';
 
 class Main extends Component {
-  constructor() {
-    super();
-    this.state = {
-      newRepo: '',
-      repositories: [],
-      loading: false,
-      error: null,
-    };
-  }
+  state = {
+    newRepo: '',
+    repositories: [],
+    loading: false,
+    error: null,
+  };
 
   // Carregar os dados do localStorage
   componentDidMount() {
@@ -51,16 +48,18 @@ class Main extends Component {
     try {
       const { newRepo, repositories } = this.state;
 
-      if (newRepo === '') throw 'You need indicate a repository';
+      if (newRepo === '') throw 'Você precisa indicar um repositório';
 
       const hasRepo = repositories.find((r) => r.name === newRepo);
 
-      if (hasRepo) throw 'Double repository';
+      if (hasRepo) throw 'Repositório duplicado';
 
       const response = await api.get(`/repos/${newRepo}`);
 
       const data = {
         name: response.data.full_name,
+        avatar: response.data.owner.avatar_url,
+        id: 1,
       };
 
       this.setState({
