@@ -43,7 +43,7 @@ class Repository extends Component {
       api.get(`/repos/${repoName}/issues`, {
         params: {
           state: filters.find((f) => f.active).state,
-          per_page: 5,
+          per_page: 4,
         },
       }),
     ]);
@@ -64,7 +64,7 @@ class Repository extends Component {
     const response = await api.get(`/repos/${repoName}/issues`, {
       params: {
         state: filters[filterIndex].state,
-        per_page: 5,
+        per_page: 4,
         page,
       },
     });

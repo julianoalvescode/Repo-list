@@ -64,6 +64,7 @@ export const Content = styled.div`
 
     button {
       cursor: pointer;
+      background-color: #fff;
       padding: 0.5rem 1rem;
       border-radius: 3px;
       font-size: 14px;
@@ -82,6 +83,9 @@ export const Content = styled.div`
       color: #818181;
       margin: 0 0.5rem;
       transition: all 0.2s ease-in;
+      &:visited {
+        background-color: #1df432;
+      }
       &:hover {
         background-color: #1df432;
         color: #000;
